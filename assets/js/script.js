@@ -15,9 +15,46 @@ searchForm.addEventListener('submit', function fetchMovieInfo
   .then(function(data) {
     console.log(data)
     var results = document.getElementById('results');
-    results.innerHTML = '<p>'+ JSON.stringify(data) + '</p>'
-  })
+   
+    printResults(data);
+
+    })
+
 })
+
+function printResults(data){
+ 
+  var currentMovie= document.createElement('div');
+  currentMovie.classList.add('row', 'card');
+
+  var currentMovieBody= document.createElement('div');
+  currentMovieBody.classList.add('card-body');
+  currentMovie.append(currentMovieBody);
+   
+  var movieTitle = document.createElement('h3');
+  movieTitle.textContent = data.Title;
+  console.log(movieTitle)
+  var moviePoster= document.createElement('img')
+  moviePoster= data.Poster;
+  if (moviePoster !== "N/A"){
+    $('.poster').attr('src', moviePoster);
+  }
+  console.log(moviePoster)
+  var movieYear=document.createElement('p');
+  movieYear.textContent= data.Year;
+  var movieRating= document.createElement('p');
+  movieRating.textContent= data.imdbRating;
+  var movieGenre= document.createElement('p');
+  movieGenre.textContent= data.Genre;
+  console.log(movieGenre)
+
+  currentMovieBody.append(movieTitle, moviePoster, movieYear,movieRating, movieGenre);
+  results.append(currentMovieBody);
+
+  
+}
+
+
 
 var tmdbAPIkey = '7b922d5ddcd9e375ab0a580e678495c9'
 var tmdbsample = 'https://api.themoviedb.org/3/movie/550?api_key=' + tmdbAPIkey;
