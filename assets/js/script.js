@@ -3,6 +3,7 @@ var omdbAPIkey = 'a6d7ec72'
 // i=tt3896198&
 var searchForm = document.getElementById('searchForm')
 var movieSearch = document.getElementById('movie-search-box')
+var results = document.getElementById('results');
 searchForm.addEventListener('submit', function fetchMovieInfo
 (e, movieTitle){
   e.preventDefault();
@@ -14,7 +15,7 @@ searchForm.addEventListener('submit', function fetchMovieInfo
 })
   .then(function(data) {
     console.log(data)
-    var results = document.getElementById('results');
+  
    
     printResults(data);
 
@@ -23,6 +24,7 @@ searchForm.addEventListener('submit', function fetchMovieInfo
 })
 
 function printResults(data){
+  //results.innerHTML='';
  
   var currentMovie= document.createElement('div');
   currentMovie.classList.add('row', 'card');
@@ -32,23 +34,28 @@ function printResults(data){
   currentMovie.append(currentMovieBody);
    
   var movieTitle = document.createElement('h3');
-  movieTitle.textContent = data.Title;
+  movieTitle.textContent = "Title: " + data.Title;
   console.log(movieTitle)
-  var moviePoster= document.createElement('img')
-  moviePoster= data.Poster;
+  
+  var moviePoster= data.Poster;
+  moviePoster.classList.add('hidden');
   if (moviePoster !== "N/A"){
     $('.poster').attr('src', moviePoster);
   }
   console.log(moviePoster)
   var movieYear=document.createElement('p');
-  movieYear.textContent= data.Year;
+  movieYear.textContent= "Year: " + data.Year;
   var movieRating= document.createElement('p');
-  movieRating.textContent= data.imdbRating;
+  movieRating.textContent= "Rating: " + data.imdbRating;
   var movieGenre= document.createElement('p');
-  movieGenre.textContent= data.Genre;
+  movieGenre.textContent= "Genre: " + data.Genre;
   console.log(movieGenre)
+  var previewButton= document.createElement('button');
+  previewButton.textContent= 'Watch Preview';
+  var fullLength= document.createElement('button');
+  fullLength.textContent= 'Watch Full Length Video';
 
-  currentMovieBody.append(movieTitle, moviePoster, movieYear,movieRating, movieGenre);
+  currentMovieBody.append(movieTitle, moviePoster, movieYear,movieRating, movieGenre, previewButton, fullLength);
   results.append(currentMovieBody);
 
   
