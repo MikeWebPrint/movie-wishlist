@@ -127,7 +127,19 @@ body {
   color: black;
   opacity: 0.5;
   font-weight: bolder;
-
+}
+html {
+  background-image: url(./assets/background.jpg);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+header {
+  margin-top: 0%;
+  margin-left: 30rem;
+  position: fixed;
+  text-align: center;
 }
 #results {
   color: white;
