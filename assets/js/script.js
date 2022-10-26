@@ -38,7 +38,7 @@ function printResults(data){
   console.log(movieTitle)
   
   var moviePoster= data.Poster;
-  moviePoster.classList.add('hidden');
+  
   if (moviePoster !== "N/A"){
     $('.poster').attr('src', moviePoster);
   }
