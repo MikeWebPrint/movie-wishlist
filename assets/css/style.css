@@ -133,3 +133,12 @@ body {
   color: white;
 }
 
+#searchFormTest {
+  margin-top: 20rem;
+  background-color: white;
+  width: 20rem;
+  height: 20rem;
+}
+#movie-search-boxYT {
+  background-color: white;
+}
