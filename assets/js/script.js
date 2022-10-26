@@ -25,8 +25,8 @@ searchForm.addEventListener('submit', function fetchMovieInfo
 
 function printResults(data){
   //results.innerHTML='';
- 
-  var currentMovie= document.createElement('div');
+
+   var currentMovie= document.createElement('div');
   currentMovie.classList.add('row', 'card');
 
   var currentMovieBody= document.createElement('div');
