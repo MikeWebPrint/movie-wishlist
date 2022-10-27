@@ -12,7 +12,7 @@ html, body {
 }
 
 body {
-  background: #252525;
+  background-image: url(/assets/dark-background.jpg);
 }
 
 .search-container {
@@ -142,3 +142,14 @@ body {
 #movie-search-boxYT {
   background-color: white;
 }
+img {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 300px;
+  width: 400px;
+  height: 400px;
+}
+
