@@ -23,7 +23,9 @@ searchForm.addEventListener('submit', function fetchMovieInfo
     console.log(data)
   movieStorage.push(data.Title);
    localStorage.setItem("movie",JSON.stringify(movieStorage))
+  
     printResults(data);
+    
     printLastViewed(movieStorage);
    
 
@@ -43,12 +45,13 @@ function printLastViewed(){
    movieList.innerHTML += movieStorage[i];
     
     mListContainer.append(movieList);
+    
   }
   console.log(movieList);
 }
 
 function printResults(data){
- currentMovieBody='';
+ 
 
    var currentMovie= document.createElement('div');
   currentMovie.classList.add('row', 'card');
@@ -60,8 +63,8 @@ function printResults(data){
   var movieTitle = document.createElement('h3');
   movieTitle.textContent = "Title: " + data.Title;
   console.log(movieTitle)
-  var moviePoster= document.createElement('p');
-  moviePoster.setAttribute('class','hidden');
+  var moviePoster= document.createElement('img');
+  
    moviePoster= data.Poster;
   
   if (moviePoster !== "N/A"){
@@ -80,7 +83,7 @@ function printResults(data){
   var fullLength= document.createElement('button');
   fullLength.textContent= 'Watch Full Length Video';
 
-  currentMovieBody.append(movieTitle, moviePoster, movieYear,movieRating, movieGenre, previewButton, fullLength);
+  currentMovieBody.append(movieTitle, movieYear,movieRating, movieGenre, previewButton, fullLength);
   results.append(currentMovieBody);
 
   
