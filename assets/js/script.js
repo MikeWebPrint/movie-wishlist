@@ -4,6 +4,7 @@ var omdbAPIkey = 'a6d7ec72'
 var searchForm = document.getElementById('searchForm')
 var movieSearch = document.getElementById('movie-search-box')
 var results = document.getElementById('results');
+var movieStorage = JSON.parse(localStorage.getItem('movie'))||[];
 searchForm.addEventListener('submit', function fetchMovieInfo
 (e, movieTitle){
   e.preventDefault();
@@ -15,16 +16,33 @@ searchForm.addEventListener('submit', function fetchMovieInfo
 })
   .then(function(data) {
     console.log(data)
-  
-   
+  movieStorage.push(data.Title);
+   localStorage.setItem("movie",JSON.stringify(movieStorage))
     printResults(data);
+   
 
     })
 
 })
+function printLastViewed(){
+  var mListContainer= document.querySelector('.last-viewed') ;
+ 
+ for(var i = 0; i < movieStorage.length; i++)
+  {
+    var movieList=document.createElement('li')
+    movieList.innerHTML = movieStorage[i];
 
+
+
+mListContainer.append(movieStorage[i]);
+
+
+
+  }
+}
+printLastViewed();
 function printResults(data){
-  //results.innerHTML='';
+ 
 
    var currentMovie= document.createElement('div');
   currentMovie.classList.add('row', 'card');
@@ -36,8 +54,9 @@ function printResults(data){
   var movieTitle = document.createElement('h3');
   movieTitle.textContent = "Title: " + data.Title;
   console.log(movieTitle)
-  
-  var moviePoster= data.Poster;
+  var moviePoster= document.createElement('p');
+  moviePoster.classList.add('hidden');
+   moviePoster= data.Poster;
   
   if (moviePoster !== "N/A"){
     $('.poster').attr('src', moviePoster);
