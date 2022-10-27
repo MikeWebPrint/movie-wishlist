@@ -12,18 +12,19 @@ html, body {
 }
 
 body {
-  background-image: url(/assets/dark-background.jpg);
+  background-image: url(../../assets/images/dark-background.jpg);
+  background-size: cover;
 }
 
 .search-container {
-  position: absolute;
+  /* position: relative; */
   margin: auto;
-  top: 0;
+  /* top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 100; */
   width: 300px;
-  height: 100px;
+  /* height: 50px; */
 }
 .search-container .search {
   position: absolute;
@@ -154,14 +155,32 @@ header {
 #movie-search-boxYT {
   background-color: white;
 }
-img {
+header img {
   position: absolute;
   margin: auto;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 300px;
-  width: 400px;
-  height: 400px;
+  top: 25px;
+  width: 200px;
+  height: 200px;
 }
-
+.d-none {
+  display: none;
+}
+.d-block {
+  display: block;
+}
+#results {
+  position: absolute;
+  top: 500;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  max-width: 300px;
+  /* text-align: center; */
+}
+#results img {
+  width: 200px;
+}
