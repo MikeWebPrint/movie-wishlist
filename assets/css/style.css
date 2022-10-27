@@ -130,11 +130,11 @@ body {
   font-weight: bolder;
 }
 html {
-  background-image: url(./assets/background.jpg);
+  /* background-image: url(../../assets/images/background.jpg);
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
+  background-size: cover; */
 }
 header {
   margin: 10rem auto;
