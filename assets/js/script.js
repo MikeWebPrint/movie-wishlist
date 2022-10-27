@@ -1,6 +1,5 @@
 // OMDB 
 var omdbAPIkey = 'a6d7ec72'
-// i=tt3896198&
 var searchForm = document.getElementById('searchForm')
 var movieSearch = document.getElementById('movie-search-box')
 var results = document.getElementById('results');
@@ -14,17 +13,29 @@ searchForm.addEventListener('submit', function fetchMovieInfo
   return response.json();
 })
   .then(function(data) {
+    printResults(data)
     console.log(data)
-  
-   
-    printResults(data);
-
+    var imdbId = data.imdbID;
+    var YTAPIkey = 'AIzaSyDrzmBZCuAd6fYctQJe9WsiA7sfQjFDFJA'
+    var YTsample = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&type=video&q='+ imdbId + '+'+movieTitle+'+movie+official+trailer&key='+ YTAPIkey +'&max-results=5';
+    fetch(YTsample)
+    .then(function(response){
+    return response.json();
+  })
+    .then(function(data) {
+      var resultsYT = document.getElementById('resultsYT');
+      var YTvideolink = data.items[0].id.videoId
+      resultsYT.innerHTML = '<p>'+ movieTitle + '</p><a href="https://www.youtube.com/watch?v='+YTvideolink+'" target="_blank">Video Link HERE</a>'
+      console.log(YTvideolink)
+    })
+    return data
     })
 
 })
 
 function printResults(data){
   //results.innerHTML='';
+  var YTvideolink = data.items[0].id.videoId
 
    var currentMovie= document.createElement('div');
   currentMovie.classList.add('row', 'card');
@@ -50,8 +61,10 @@ function printResults(data){
   var movieGenre= document.createElement('p');
   movieGenre.textContent= "Genre: " + data.Genre;
   console.log(movieGenre)
-  var previewButton= document.createElement('button');
+  var previewButton= document.createElement('a');
   previewButton.textContent= 'Watch Preview';
+  previewButton.setAttribute('href', ('https://www.youtube.com/watch?v=' + YTvideolink))
+
   var fullLength= document.createElement('button');
   fullLength.textContent= 'Watch Full Length Video';
 
@@ -83,26 +96,26 @@ function fetchMovieInfo(tmdbsample){
 // or
 // https://image.tmdb.org/t/p/original
 
-var YTAPIkey = 'AIzaSyDrzmBZCuAd6fYctQJe9WsiA7sfQjFDFJA'
-// i=tt3896198&
-var searchFormTest = document.getElementById('searchFormTest')
-var movieSearchYT = document.getElementById('movie-search-boxYT')
-searchFormTest.addEventListener('submit', function fetchMovieInfoYT
-(e, movieTitle){
-  e.preventDefault();
-  var movieTitle = movieSearchYT.value;
-  var imdbId = 'tt0032138';
-  var YTsample = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&type=video&q='+ imdbId + '+'+movieTitle+'+movie+official+trailer&key='+ YTAPIkey +'&max-results=5';
-  fetch(YTsample)
-  .then(function(response){
-  return response.json();
-})
-  .then(function(data) {
-    // console.log(data)
-    var resultsYT = document.getElementById('resultsYT');
-    var YTvideolink = data.items[0].id.videoId
-    // resultsYT.innerHTML = '<p>'+ JSON.stringify(data) + '</p><a href="https://www.youtube.com/watch?v='+YTvideolink+'" target="_blank">Video Link HERE</a>'
-    resultsYT.innerHTML = '<p>'+ movieTitle + '</p><a href="https://www.youtube.com/watch?v='+YTvideolink+'" target="_blank">Video Link HERE</a>'
-    console.log(YTvideolink)
-  })
-})
+// var YTAPIkey = 'AIzaSyDrzmBZCuAd6fYctQJe9WsiA7sfQjFDFJA'
+// // i=tt3896198&
+// var searchFormTest = document.getElementById('searchFormTest')
+// var movieSearchYT = document.getElementById('movie-search-boxYT')
+// searchFormTest.addEventListener('submit', function fetchMovieInfoYT
+// (e, movieTitle){
+//   e.preventDefault();
+//   var movieTitle = movieSearchYT.value;
+//   var imdbId = 'tt0083399';
+//   var YTsample = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&type=video&q='+ imdbId + '+'+movieTitle+'+movie+official+trailer&key='+ YTAPIkey +'&max-results=5';
+//   fetch(YTsample)
+//   .then(function(response){
+//   return response.json();
+// })
+//   .then(function(data) {
+//     // console.log(data)
+//     var resultsYT = document.getElementById('resultsYT');
+//     var YTvideolink = data.items[0].id.videoId
+//     // resultsYT.innerHTML = '<p>'+ JSON.stringify(data) + '</p><a href="https://www.youtube.com/watch?v='+YTvideolink+'" target="_blank">Video Link HERE</a>'
+//     resultsYT.innerHTML = '<p>'+ movieTitle + '</p><a href="https://www.youtube.com/watch?v='+YTvideolink+'" target="_blank">Video Link HERE</a>'
+//     console.log(YTvideolink)
+//   })
+// })
