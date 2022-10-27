@@ -45,32 +45,30 @@ function printLastViewed(){
    movieList.innerHTML += movieStorage[i];
     
     mListContainer.append(movieList);
+
+  
     
   }
   console.log(movieList);
 }
+console.log(mListContainer);
 
 function printResults(data){
  
 
-   var currentMovie= document.createElement('div');
+  var currentMovie= document.createElement('div');
   currentMovie.classList.add('row', 'card');
-
   var currentMovieBody= document.createElement('div');
   currentMovieBody.classList.add('card-body');
   currentMovie.append(currentMovieBody);
-   
-  var movieTitle = document.createElement('h3');
+   var movieTitle = document.createElement('h3');
   movieTitle.textContent = "Title: " + data.Title;
   console.log(movieTitle)
   var moviePoster= document.createElement('img');
-  
-   moviePoster= data.Poster;
-  
+  moviePoster= data.Poster;
   if (moviePoster !== "N/A"){
     $('.poster').attr('src', moviePoster);
   }
-  console.log(moviePoster)
   var movieYear=document.createElement('p');
   movieYear.textContent= "Year: " + data.Year;
   var movieRating= document.createElement('p');
