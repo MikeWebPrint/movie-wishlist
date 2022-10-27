@@ -4,14 +4,17 @@ var searchForm = document.getElementById('searchForm')
 var movieSearch = document.getElementById('movie-search-box')
 var results = document.getElementById('results');
 var movieStorage = JSON.parse(localStorage.getItem('movie'))||[];
+var mListContainer= document.querySelector('.last-viewed') ;
+
 searchForm.addEventListener('submit', function fetchMovieInfo
 (e, movieTitle){
   e.preventDefault();
   var movieTitle = movieSearch.value;
   var omdbsample = 'https://www.omdbapi.com/?apikey='+ omdbAPIkey +'&t=' + movieTitle;
   movieSearch.value = '';
+ 
   movieSearch.blur();
-  // results.innerHTML = ''
+  
   fetch(omdbsample)
   .then(function(response){
   return response.json();
@@ -21,30 +24,31 @@ searchForm.addEventListener('submit', function fetchMovieInfo
   movieStorage.push(data.Title);
    localStorage.setItem("movie",JSON.stringify(movieStorage))
     printResults(data);
+    printLastViewed(movieStorage);
    
 
     })
 
 })
+
+
+
+
 function printLastViewed(){
-  var mListContainer= document.querySelector('.last-viewed') ;
+  mListContainer.innerHTML='';
  
  for(var i = 0; i < movieStorage.length; i++)
   {
-    var movieList=document.createElement('li')
-    movieList.innerHTML = movieStorage[i];
-
-
-
-mListContainer.append(movieStorage[i]);
-
-
-
+   var movieList=document.createElement('li');
+   movieList.innerHTML += movieStorage[i];
+    
+    mListContainer.append(movieList);
   }
+  console.log(movieList);
 }
-printLastViewed();
+
 function printResults(data){
- 
+ currentMovieBody='';
 
    var currentMovie= document.createElement('div');
   currentMovie.classList.add('row', 'card');
@@ -57,7 +61,7 @@ function printResults(data){
   movieTitle.textContent = "Title: " + data.Title;
   console.log(movieTitle)
   var moviePoster= document.createElement('p');
-  moviePoster.classList.add('hidden');
+  moviePoster.setAttribute('class','hidden');
    moviePoster= data.Poster;
   
   if (moviePoster !== "N/A"){
@@ -144,7 +148,7 @@ function fetchMovieInfo(tmdbsample){
       
     })
     })
-  })
+  }
   var currentMovieBody = document.getElementById('currentMovieBody')
 
 
