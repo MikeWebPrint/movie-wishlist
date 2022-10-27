@@ -172,3 +172,6 @@ header img {
 #results img {
   width: 200px;
 }
+.hidden{
+  display:none;
+}

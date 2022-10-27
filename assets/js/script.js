@@ -3,17 +3,104 @@ var omdbAPIkey = 'a6d7ec72'
 var searchForm = document.getElementById('searchForm')
 var movieSearch = document.getElementById('movie-search-box')
 var results = document.getElementById('results');
+var movieStorage = JSON.parse(localStorage.getItem('movie'))||[];
+var mListContainer= document.querySelector('.last-viewed') ;
+
 searchForm.addEventListener('submit', function fetchMovieInfo
 (e, movieTitle){
   e.preventDefault();
   var movieTitle = movieSearch.value;
   var omdbsample = 'https://www.omdbapi.com/?apikey='+ omdbAPIkey +'&t=' + movieTitle;
   movieSearch.value = '';
+ 
   movieSearch.blur();
-  // results.innerHTML = ''
+  
   fetch(omdbsample)
   .then(function(response){
   return response.json();
+})
+  .then(function(data) {
+    console.log(data)
+  movieStorage.push(data.Title);
+   localStorage.setItem("movie",JSON.stringify(movieStorage))
+  
+    printResults(data);
+    
+    printLastViewed(movieStorage);
+   
+
+    })
+
+})
+
+
+
+
+function printLastViewed(){
+  mListContainer.innerHTML='';
+ 
+ for(var i = 0; i < movieStorage.length; i++)
+  {
+   var movieList=document.createElement('li');
+   movieList.innerHTML += movieStorage[i];
+    
+    mListContainer.append(movieList);
+    
+  }
+  console.log(movieList);
+}
+
+function printResults(data){
+ 
+
+   var currentMovie= document.createElement('div');
+  currentMovie.classList.add('row', 'card');
+
+  var currentMovieBody= document.createElement('div');
+  currentMovieBody.classList.add('card-body');
+  currentMovie.append(currentMovieBody);
+   
+  var movieTitle = document.createElement('h3');
+  movieTitle.textContent = "Title: " + data.Title;
+  console.log(movieTitle)
+  var moviePoster= document.createElement('img');
+  
+   moviePoster= data.Poster;
+  
+  if (moviePoster !== "N/A"){
+    $('.poster').attr('src', moviePoster);
+  }
+  console.log(moviePoster)
+  var movieYear=document.createElement('p');
+  movieYear.textContent= "Year: " + data.Year;
+  var movieRating= document.createElement('p');
+  movieRating.textContent= "Rating: " + data.imdbRating;
+  var movieGenre= document.createElement('p');
+  movieGenre.textContent= "Genre: " + data.Genre;
+  console.log(movieGenre)
+  var previewButton= document.createElement('button');
+  previewButton.textContent= 'Watch Preview';
+  var fullLength= document.createElement('button');
+  fullLength.textContent= 'Watch Full Length Video';
+
+  currentMovieBody.append(movieTitle, movieYear,movieRating, movieGenre, previewButton, fullLength);
+  results.append(currentMovieBody);
+
+  
+}
+
+
+
+var tmdbAPIkey = '7b922d5ddcd9e375ab0a580e678495c9'
+var tmdbsample = 'https://api.themoviedb.org/3/movie/550?api_key=' + tmdbAPIkey;
+
+function fetchMovieInfo(tmdbsample){
+  fetch(tmdbsample)
+  .then(function(response){
+  return response.json();
+})
+  .then(function(data) {
+    console.log(data)
   })
   .then(function(data) {
     console.log(data)
@@ -64,7 +151,7 @@ searchForm.addEventListener('submit', function fetchMovieInfo
       
     })
     })
-  })
+  }
   var currentMovieBody = document.getElementById('currentMovieBody')
 
 
