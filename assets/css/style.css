@@ -189,6 +189,11 @@ header img {
 #results img {
   width: 200px;
 }
+<<<<<<< HEAD
+.hidden{
+  display:none;
+}
+=======
 
 .hidden {
   display: none;
@@ -198,3 +203,4 @@ header img {
   outline: solid 1px white;
   height: 25px;
 }
+>>>>>>> 7f5f925d1df27e7932f34326723a36e8de2968ea
