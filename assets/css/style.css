@@ -1,14 +1,16 @@
-
 @import url("https://fonts.googleapis.com/css?family=Inconsolata:700");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
+  color: #ccc;
 }
 
 body {
@@ -29,6 +31,7 @@ h1{
   width: 300px;
   /* height: 50px; */
 }
+
 .search-container .search {
   position: absolute;
   margin: auto;
@@ -43,11 +46,13 @@ h1{
   z-index: 4;
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.4);
 }
+
 .search-container .search:hover {
   cursor: pointer;
 }
 
 .search-container .search::before { 
+
   content: "";
   position: absolute;
   margin: auto;
@@ -60,6 +65,7 @@ h1{
   transform: rotate(45deg);
   transition: all 1s;
 }
+
 .search-container .search::after {
   content: "";
   position: absolute;
@@ -74,6 +80,7 @@ h1{
   border: 2px solid white;
   transition: all 1s;
 }
+
 .search-container input {
   font-family: "Inconsolata", monospace;
   position: absolute;
@@ -97,9 +104,11 @@ h1{
   font-weight: bolder;
   letter-spacing: 0.2em;
 }
+
 .search-container input:hover {
   cursor: pointer;
 }
+
 .search-container input:focus {
   width: 375px;
   opacity: 1;
@@ -109,13 +118,16 @@ h1{
   left: 400px;
   background: black;
   z-index: 16;
+
 }
-.search-container input:focus ~ .search::before {
+
+.search-container input:focus~.search::before {
   top: 0;
   left: 29px;
   width: 25px;
 }
-.search-container input:focus ~ .search::after {
+
+.search-container input:focus~.search::after {
   top: 0;
   left: 3px;
   width: 25px;
@@ -125,11 +137,13 @@ h1{
   border-radius: 0%;
   transform: rotate(-45deg);
 }
+
 .search-container input::placeholder {
   color: white;
   opacity: 0.5;
   font-weight: bolder;
 }
+
 html {
   /* background-image: url(../../assets/images/background.jpg);
   -webkit-background-size: cover;
@@ -137,23 +151,12 @@ html {
   -o-background-size: cover;
   background-size: cover; */
 }
+
 header {
   margin: 10rem auto;
   text-align: center;
 }
-#results {
-  color: white;
-}
 
-#searchFormTest {
-  margin-top: 20rem;
-  background-color: white;
-  width: 20rem;
-  height: 20rem;
-}
-#movie-search-boxYT {
-  background-color: white;
-}
 header img {
   position: absolute;
   margin: auto;
@@ -163,12 +166,15 @@ header img {
   width: 400px;
   height: 400px;
 }
+
 .d-none {
   display: none;
 }
+
 .d-block {
   display: block;
 }
+
 #results {
   position: absolute;
   top: 150px;
@@ -182,8 +188,10 @@ header img {
   justify-content: space-between;
   
 
+
   /* text-align: center; */
 }
+
 #results img {
   width: 200px;
 }
@@ -194,3 +202,14 @@ header img {
 nav{
   color: black;
 }
+
+
+.hidden {
+  display: none;
+}
+
+#favorites-container {
+  outline: solid 1px white;
+  height: 25px;
+}
+
