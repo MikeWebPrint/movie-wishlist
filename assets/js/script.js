@@ -57,6 +57,7 @@ searchForm.addEventListener('submit', function fetchMovieInfo
     var YTsample = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&type=video&q='+ imdbId + '+'+movieTitle+'+movie+official+trailer&key='+ YTAPIkey +'&max-results=5';
     fetch(YTsample)
     .then(function(response){
+      console.log(response)
       return response.json();
     })
     .then(function(data) {
@@ -78,8 +79,8 @@ searchForm.addEventListener('submit', function fetchMovieInfo
 
 })
 
-
-
+import { dummyData } from './modules/ytDummyData.js';
+console.log(dummyData);
 
 // function printLastViewed(){
 //   mListContainer.innerHTML='';
