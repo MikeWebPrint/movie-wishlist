@@ -53,9 +53,14 @@ searchForm.addEventListener('submit', function fetchMovieInfo
     movieGenre.textContent= "Genre: " + data.Genre;
     var movieRating= document.createElement('p');
     movieRating.textContent= "Rating: " + data.imdbRating +"/ 10";
+    var movieRated= document.createElement('p');
+    movieRated.textContent= "Rated: " + data.Rated;
+    var starButton=document.createElement('button');
+    starButton.setAttribute('id', 'star-button');
 
    
-    currentMovieBody.append(movieTitle, movieActor, movieDirector,movieYear,movieGenre, movieRating);
+    currentMovieBody.append(movieTitle, movieActor, movieDirector,movieRated, movieYear,movieGenre, movieRating, starButton);
+
     currentMovie.append(currentMovieBody);
     results.append(currentMovie);
     var imdbId = data.imdbID;
