@@ -69,18 +69,31 @@ searchForm.addEventListener('submit', function fetchMovieInfo
       results.appendChild(previewButton)
       var YTiframe = document.createElement('div');
       YTiframe.innerHTML = '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + YTvideolink +'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-      // YTiframe.innerHTML = '<iframe width="560" height="315" src="https://www.youtube.com/embed/UaVTIH8mujA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
       results.appendChild(YTiframe)
       console.log(YTvideolink)
 
       
     })
     })
-
+// when switching back from dummyData, uncomment the following brackets
 // })
 
 import { dummyData } from './modules/ytDummyData.js';
 console.log(dummyData);
+
+// function printLastViewed(){
+//   mListContainer.innerHTML='';
+ 
+//  for(var i = 0; i < movieStorage.length; i++)
+//   {
+//    var movieList=document.createElement('li');
+//    movieList.innerHTML += movieStorage[i];
+    
+//     mListContainer.append(movieList);
+    
+//   }
+//   console.log(movieList);
+// }
     
   var currentMovieBody = document.getElementById('currentMovieBody')
 
