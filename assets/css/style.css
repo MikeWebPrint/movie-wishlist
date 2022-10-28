@@ -16,6 +16,9 @@ body {
   background-size: cover;
 }
 
+h1{
+  display: none;
+}
 .search-container {
   /* position: relative; */
   margin: auto;
@@ -30,9 +33,8 @@ body {
   position: absolute;
   margin: auto;
   top: 0;
-  right: 0;
   bottom: 0;
-  left: 0;
+  left: 100px;
   width: 80px;
   height: 80px;
   background: #7ed957;
@@ -44,19 +46,19 @@ body {
 .search-container .search:hover {
   cursor: pointer;
 }
-.search-container .search::before {
+
+.search-container .search::before { 
   content: "";
   position: absolute;
   margin: auto;
   top: 22px;
-  right: 0;
   bottom: 0;
-  left: 22px;
+  left: 45px;
   width: 12px;
   height: 2px;
   background: white;
   transform: rotate(45deg);
-  transition: all 0.5s;
+  transition: all 1s;
 }
 .search-container .search::after {
   content: "";
@@ -70,16 +72,15 @@ body {
   height: 25px;
   border-radius: 50%;
   border: 2px solid white;
-  transition: all 0.5s;
+  transition: all 1s;
 }
 .search-container input {
   font-family: "Inconsolata", monospace;
   position: absolute;
   margin: auto;
   top: 0;
-  right: 0;
   bottom: 0;
-  left: 0;
+  left: 100px;
   width: 50px;
   height: 50px;
   outline: none;
@@ -94,29 +95,29 @@ body {
   opacity: 0;
   z-index: 5;
   font-weight: bolder;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.2em;
 }
 .search-container input:hover {
   cursor: pointer;
 }
 .search-container input:focus {
-  width: 300px;
+  width: 375px;
   opacity: 1;
   cursor: text;
 }
 .search-container input:focus ~ .search {
-  right: -250px;
-  background: #151515;
-  z-index: 6;
+  left: 400px;
+  background: black;
+  z-index: 16;
 }
 .search-container input:focus ~ .search::before {
   top: 0;
-  left: 0;
+  left: 29px;
   width: 25px;
 }
 .search-container input:focus ~ .search::after {
   top: 0;
-  left: 0;
+  left: 3px;
   width: 25px;
   height: 2px;
   border: none;
@@ -125,7 +126,7 @@ body {
   transform: rotate(-45deg);
 }
 .search-container input::placeholder {
-  color: black;
+  color: white;
   opacity: 0.5;
   font-weight: bolder;
 }
@@ -156,12 +157,11 @@ header {
 header img {
   position: absolute;
   margin: auto;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 10px;
+  left: 100px;
   top: 25px;
-  width: 200px;
-  height: 200px;
+  width: 400px;
+  height: 400px;
 }
 .d-none {
   display: none;
