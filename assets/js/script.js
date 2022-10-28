@@ -43,13 +43,19 @@ searchForm.addEventListener('submit', function fetchMovieInfo
       poster.setAttribute('src', moviePoster)
       results.appendChild(poster)
     }
+    var movieActor= document.createElement('p');
+    movieActor.textContent="Actors: " + data.Actors;
+    var movieDirector= document.createElement('p');
+    movieDirector.textContent="Director(s): " + data.Director;
     var movieYear=document.createElement('p');
     movieYear.textContent= "Year: " + data.Year;
-    var movieRating= document.createElement('p');
-    movieRating.textContent= "Rating: " + data.imdbRating;
     var movieGenre= document.createElement('p');
     movieGenre.textContent= "Genre: " + data.Genre;
-    currentMovieBody.append(movieTitle, movieYear,movieRating, movieGenre);
+    var movieRating= document.createElement('p');
+    movieRating.textContent= "Rating: " + data.imdbRating +"/ 10";
+
+   
+    currentMovieBody.append(movieTitle, movieActor, movieDirector,movieYear,movieGenre, movieRating);
     currentMovie.append(currentMovieBody);
     results.append(currentMovie);
     var imdbId = data.imdbID;
@@ -79,17 +85,17 @@ searchForm.addEventListener('submit', function fetchMovieInfo
     })
     })
 
-})
- function printLastViewed(){
-  mListContainer.innerHTML='';
-// })
+
+
 
 import { dummyData } from './modules/ytDummyData.js';
 console.log(dummyData);
 
 // function printLastViewed(){
 //   mListContainer.innerHTML='';
- 
+function printLastViewed(){
+  mListContainer.innerHTML='';
+// })
  for(var i = 0; i < movieStorage.length; i++){
   
    var movieList=document.createElement('li');
