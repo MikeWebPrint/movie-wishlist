@@ -81,19 +81,8 @@ searchForm.addEventListener('submit', function fetchMovieInfo
 
 
 
-// function printLastViewed(){
-//   mListContainer.innerHTML='';
- 
-//  for(var i = 0; i < movieStorage.length; i++)
-//   {
-//    var movieList=document.createElement('li');
-//    movieList.innerHTML += movieStorage[i];
-    
-//     mListContainer.append(movieList);
-    
-//   }
-//   console.log(movieList);
-// }
+
+
 
 // function printResults(data){
  
