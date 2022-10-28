@@ -9,6 +9,7 @@ var mListContainer = document.querySelector('.last-viewed');
 searchForm.addEventListener('submit', function fetchMovieInfo
   (e, movieTitle) {
   e.preventDefault();
+
   var movieTitle = movieSearch.value;
   var omdbsample = 'https://www.omdbapi.com/?apikey=' + omdbAPIkey + '&t=' + movieTitle;
   movieSearch.value = '';
@@ -40,13 +41,26 @@ searchForm.addEventListener('submit', function fetchMovieInfo
         poster.setAttribute('src', moviePoster)
         results.appendChild(poster)
       }
+      var movieActor = document.createElement('p');
+      movieActor.textContent = "Actors: " + data.Actors;
+      var movieDirector = document.createElement('p');
+      movieDirector.textContent = "Director: " + data.Director;
+      var movieRated = document.createElement('p');
+      movieRated.textContent = "Rated: " + data.Rated;
       var movieYear = document.createElement('p');
       movieYear.textContent = "Year: " + data.Year;
       var movieRating = document.createElement('p');
       movieRating.textContent = "Rating: " + data.imdbRating;
       var movieGenre = document.createElement('p');
       movieGenre.textContent = "Genre: " + data.Genre;
-      currentMovieBody.append(movieTitle, movieYear, movieRating, movieGenre);
+      var favoriteButton = document.createElement('button');
+      
+     
+      
+      
+
+
+      currentMovieBody.append(movieTitle, movieActor, movieDirector,movieRated, movieYear, movieRating, movieGenre, favoriteButton);
       currentMovie.append(currentMovieBody);
       results.append(currentMovie);
       var imdbId = data.imdbID;
