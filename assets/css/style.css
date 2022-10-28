@@ -12,7 +12,7 @@ html, body {
 }
 
 body {
-  background-image: url(../../assets/images/dark-background.jpg);
+  background-image: linear-gradient(black, rgb(1, 1, 39));
   background-size: cover;
 }
 
@@ -171,12 +171,17 @@ header img {
 }
 #results {
   position: absolute;
-  top: 500;
+  top: 150px;
   bottom: 0;
   left: 0;
   right: 0;
   margin: 0 auto;
   max-width: 300px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  
+
   /* text-align: center; */
 }
 #results img {
@@ -184,4 +189,8 @@ header img {
 }
 .hidden{
   display:none;
+}
+
+nav{
+  color: black;
 }
