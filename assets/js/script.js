@@ -71,12 +71,25 @@ searchForm.addEventListener('submit', function fetchMovieInfo
       // YTiframe.innerHTML = '<iframe width="560" height="315" src="https://www.youtube.com/embed/UaVTIH8mujA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
       results.appendChild(YTiframe)
       console.log(YTvideolink)
-
+      printLastViewed();
       
     })
     })
 
 })
+ function printLastViewed(){
+  mListContainer.innerHTML='';
+ 
+ for(var i = 0; i < movieStorage.length; i++){
+  if()
+   var movieList=document.createElement('li');
+   movieList.innerHTML += movieStorage[i];
+    
+    mListContainer.append(movieList);
+    
+  }
+   console.log(movieList);
+}
 
 
 
