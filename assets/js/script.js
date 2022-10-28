@@ -55,12 +55,15 @@ searchForm.addEventListener('submit', function fetchMovieInfo
     var imdbId = data.imdbID;
     var YTAPIkey = 'AIzaSyDrzmBZCuAd6fYctQJe9WsiA7sfQjFDFJA'
     var YTsample = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&type=video&q='+ imdbId + '+'+movieTitle+'+movie+official+trailer&key='+ YTAPIkey +'&max-results=5';
-    fetch(YTsample)
-    .then(function(response){
-      return response.json();
-    })
-    .then(function(data) {
-      console.log(data)
+    // following code commented out to point to dummyData instead
+    // fetch(YTsample)
+    // .then(function(response){
+    //   console.log(response)
+    //   return response.json();
+    // })
+    // .then(function(data) {
+    //   console.log(data)
+    var data = dummyData;
       var YTvideolink = data.items[0].id.videoId
       var previewButton= document.createElement('a');
       previewButton.innerHTML= '<h4>Watch Trailer</h4>';
@@ -79,6 +82,13 @@ searchForm.addEventListener('submit', function fetchMovieInfo
 })
  function printLastViewed(){
   mListContainer.innerHTML='';
+// })
+
+import { dummyData } from './modules/ytDummyData.js';
+console.log(dummyData);
+
+// function printLastViewed(){
+//   mListContainer.innerHTML='';
  
  for(var i = 0; i < movieStorage.length; i++){
   
