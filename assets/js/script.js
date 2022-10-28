@@ -81,7 +81,7 @@ searchForm.addEventListener('submit', function fetchMovieInfo
   mListContainer.innerHTML='';
  
  for(var i = 0; i < movieStorage.length; i++){
-  if()
+  
    var movieList=document.createElement('li');
    movieList.innerHTML += movieStorage[i];
     
