@@ -150,9 +150,8 @@ function viewFavorites() {
 function reload() {
   window.location.reload();
 }
-<<<<<<< HEAD
 // hideSearch();
-viewFavorites()
+// viewFavorites()
 //Let's define our favorite movies
 let movies = [
     {
@@ -393,10 +392,12 @@ let movies = [
     let row = document.createElement("tr");
     createMovieCellElementsAndAttachEvents(row, movie.title, movie.img, movie.rating)
     body.appendChild(row);
+    let table = document.getElementById('table')
+    // table.appendChild(body);
   });
   
   function addMovie(movieform) {
-    event.preventDefault(); //If we don't specify this default action of page reload will happen
+    // event.preventDefault(); //If we don't specify this default action of page reload will happen
     
     console.log("event: "+ event.target);
     console.log("form: " + movieform[1].innerHTML);
@@ -449,7 +450,6 @@ let movies = [
   table.childNodes.forEach(function(node){
     console.log(node)
   })
-=======
 
 
 
@@ -478,4 +478,3 @@ function getFavMovies() {
 function hideResults() {
   results.setAttribute('class', 'd-none')
 }
->>>>>>> 25e87d8fa473549d0a3f70eded04ec5880fcbe3e
