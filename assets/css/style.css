@@ -135,7 +135,7 @@ h1{
   border: none;
   background: white;
   border-radius: 0%;
-  transform: rotate(-45deg);
+ transform: rotate(-45deg);
 }
 
 .search-container input::placeholder {
