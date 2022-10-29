@@ -1,3 +1,7 @@
+:root{
+  --filmPrimaryColor: #7ed957;
+}
+
 @import url("https://fonts.googleapis.com/css?family=Inconsolata:700");
 
 * {
@@ -10,7 +14,7 @@ html,
 body {
   width: 100%;
   height: 100%;
-  color: #ccc;
+  /* color: #ccc; */
 }
 
 body {
@@ -18,18 +22,17 @@ body {
   background-size: cover;
 }
 
-h1{
-  display: none;
-}
+
 .search-container {
-  /* position: relative; */
-  margin: auto;
-  /* top: 0;
+  position: relative;
+  margin: 2rem auto;
+  top: 0;
   left: 0;
   right: 0;
-  bottom: 100; */
-  width: 300px;
-  /* height: 50px; */
+  bottom: 100;
+  width: 100%;
+  height: 50px;
+  /* outline: solid 1px yellow; */
 }
 
 .search-container .search {
@@ -87,7 +90,7 @@ h1{
   margin: auto;
   top: 0;
   bottom: 0;
-  left: 100px;
+  left: 75px;
   width: 50px;
   height: 50px;
   outline: none;
@@ -110,7 +113,7 @@ h1{
 }
 
 .search-container input:focus {
-  width: 375px;
+  width: 400px;
   opacity: 1;
   cursor: text;
 }
@@ -145,27 +148,15 @@ h1{
 }
 
 html {
-  /* background-image: url(../../assets/images/background.jpg);
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover; */
+
 }
 
 header {
-  margin: 10rem auto;
   text-align: center;
+  /* outline: 1px solid red; */
+
 }
 
-header img {
-  position: absolute;
-  margin: auto;
-  top: 10px;
-  left: 100px;
-  top: 25px;
-  width: 400px;
-  height: 400px;
-}
 
 .d-none {
   display: none;
@@ -176,15 +167,11 @@ header img {
 }
 
 #results {
-  position: absolute;
-  top: 150px;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  max-width: 300px;
+  margin: 2rem auto;
+  /* max-width: 300px; */
   display: flex;
-  align-items: baseline;
+  flex-wrap: wrap;
+  /* align-items: baseline; */
   justify-content: space-between;
   
 
@@ -193,7 +180,7 @@ header img {
 }
 
 #results img {
-  width: 200px;
+  max-width: 300px;
 }
 .hidden{
   display:none;
@@ -202,14 +189,11 @@ header img {
 nav{
   color: black;
 }
-
-
-.hidden {
-  display: none;
+div {
+  /* outline: solid 1px white; */
+  /* height: 25px; */
 }
 
-#favorites-container {
-  outline: solid 1px white;
-  height: 25px;
+.btn-fav {
+  background-color: var(--filmPrimaryColor);
 }
-

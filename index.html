@@ -8,7 +8,8 @@
   <meta charset="UTF-8">
 
   <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
   <!-- CSS -->
   <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
@@ -16,82 +17,64 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
-
 </head>
 
 <body>
 
+  <div class="container">
+    <nav class="navbar navbar-light ">
+      <button id="user-favorites" class="btn btn-fav" type="button">Favorites list</button>
+    </nav>
+    <!-- Header -->
+    <header id="site-header" class="header-footer-group my-3 py-5" role="banner">
+      <h1>
+        <img src="/assets/images/filmfindr!-2.png" alt="Film Findr" class="img-fluid">
+      </h1>
 
-  <!-- Header -->
-  <div class="header">
-        <h1>Movie Wishlist</h1>
-  </div>
-  <br>
-  <nav class="navbar navbar-light bg-light">
-  <button id="user-favorites" class="btn btn-outline-success" type="button">Favorites list</button>
-</nav>
-  <header id="site-header" class="header-footer-group" role="banner">
-    <div class="header-inner section-inner">
-      <img src="/assets/images/film findr!-2.png"
-      <div class="header-titles-wrapper"></div>
-    </div>
+    </header>
 
-  </header>
-
-
-    <div class="container search-container">
-      <form action="" id="searchForm">
-        <input type="text" placeholder="Search Movie title" id="movie-search-box">
-
-        <div class="search"></div>
-
-      </form>
-      
+    <div class="row">
+      <div class="col col-9 col-md-4 mx-auto">
+        <div class="search-container">
+          <form action="" id="searchForm" class="d-flex justify-content-center ">
+            <!-- search input field -->
+            <input type="text" placeholder="Search Movie title" id="movie-search-box">
+            <div class="search"></div>
+            <!-- search button -->
+            <div id="search-container" class="">
+            </div>
+          </form>
+        </div>
       </div>
-      <div class="search-list" id="search-list"></div>
-
-      <!-- <button id="New-movies" class="btn btn-outline-success" type="button">What's New</button>
-      <button id="Trending-movies" class="btn btn-outline-success" type="button">What's Trending</button>
-      <button id="user-favorites" class="btn btn-outline-success" type="button">Favorites</button> -->
-
     </div>
-      <div id="main-container">
+    <!--Last viewed movies-->
+    <div id="last-viewed-container">
+      <ol class="last-viewed">
+      </ol>
+    </div>
+    
+    <!-- Results -->
+    <div id="results" class="row">
+      <img id="poster" src="" class="d-none" />
+    </div>
 
-        <div id="search-container">
-        </div>
-
-          <!-- Results -->
-          <div id="results">
-            <img class= "poster" src=""/>
-          </div>
-
-        <!--Last viewed movies-->
-        <div id="last-viewed-container">
-            <ol class="last-viewed">
-                
-            </ol>
-
-        <div id="results" class="container">
-          <img id="poster" src="" class="d-none"/>
-        </div>
-
-        <!-- Favorites Container-->
-        <div id="favorites-container" class="d-none">
-          Favorites go in this div.
-        </div>
+    <!-- Favorites Container-->
+    <div id="favorites-container" class="d-none">
+      <!-- Favorites go in this div. -->
+    </div>
 
 
-      <div id="video-player"></div>
+    <div id="video-player"></div>
 
-      <div id="video-background" class="close-trailer"></div>
+    <div id="video-background" class="close-trailer"></div>
 
-      <!-- jQuery -->
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-      <!-- Script -->
-      <script type="module" src="./assets/js/script.js"></script>
+    <!-- Script -->
+    <script type="module" src="./assets/js/script.js"></script>
 
-
+  </div>
 </body>
 
 </html>

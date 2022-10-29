@@ -27,19 +27,19 @@ searchForm.addEventListener('submit', function fetchMovieInfo
       // printLastViewed(movieStorage);
 
       var currentMovie = document.createElement('div');
-      currentMovie.setAttribute('class', 'row card');
+      currentMovie.setAttribute('class', 'card p-3');
       var currentMovieBody = document.createElement('div');
       currentMovieBody.setAttribute('class', 'card-body');
       currentMovieBody.setAttribute('id', 'currentMovieBody')
       var movieTitleDisplay = document.createElement('h3');
-      movieTitleDisplay.textContent = "Title: " + data.Title;
+      movieTitleDisplay.innerHTML = '<h3 class="card-title">'+ data.Title +'</h3>';
       console.log(movieTitle)
       var moviePoster = data.Poster;
       if (moviePoster !== "N/A") {
         var poster = document.createElement('img')
         poster.setAttribute('id', 'poster')
         poster.setAttribute('src', moviePoster)
-        results.appendChild(poster)
+        poster.setAttribute('class', 'card-img-top')
       }
       var movieActor = document.createElement('p');
       movieActor.textContent = "Actors: " + data.Actors;
@@ -54,14 +54,15 @@ searchForm.addEventListener('submit', function fetchMovieInfo
       var movieGenre = document.createElement('p');
       movieGenre.textContent = "Genre: " + data.Genre;
       var favoriteButton = document.createElement('button');
-      
+      favoriteButton.textContent= "Add to Favorites"
+      favoriteButton.setAttribute('class', 'btn btn-fav')
      
       
       
 
 
-      currentMovieBody.append(movieTitle, movieActor, movieDirector,movieRated, movieYear, movieRating, movieGenre, favoriteButton);
-      currentMovie.append(currentMovieBody);
+      currentMovieBody.append(movieActor, movieDirector,movieRated, movieYear, movieRating, movieGenre, favoriteButton);
+      currentMovie.append(movieTitleDisplay, poster, currentMovieBody);
       results.append(currentMovie);
       var imdbId = data.imdbID;
       var YTAPIkey = 'AIzaSyDrzmBZCuAd6fYctQJe9WsiA7sfQjFDFJA'
@@ -76,16 +77,16 @@ searchForm.addEventListener('submit', function fetchMovieInfo
       //   console.log(data)
       var data = dummyData;
       var YTvideolink = data.items[0].id.videoId
-      var previewButton = document.createElement('a');
-      previewButton.innerHTML = '<h4>Watch Trailer</h4>';
-      previewButton.setAttribute('href', ('https://www.youtube.com/watch?v=' + YTvideolink));
-      results.appendChild(previewButton)
+      // var previewButton = document.createElement('a');
+      // previewButton.innerHTML = '<h4>Watch Trailer</h4>';
+      // previewButton.setAttribute('href', ('https://www.youtube.com/watch?v=' + YTvideolink));
+      // results.appendChild(previewButton)
       var YTiframe = document.createElement('div');
       YTiframe.setAttribute('class', 'ratio ratio-16x9')
       YTiframe.innerHTML = '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + YTvideolink + '" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
       results.appendChild(YTiframe)
       console.log(YTvideolink)
-
+      console.log(results)
 
     })
 })
