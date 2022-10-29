@@ -3,7 +3,6 @@ var omdbAPIkey = 'a6d7ec72'
 var searchForm = document.getElementById('searchForm')
 var movieSearch = document.getElementById('movie-search-box')
 var results = document.getElementById('results');
-// var movieStorage = JSON.parse(localStorage.getItem('movie')) || [];
 var mListContainer = document.querySelector('.last-viewed');
 var movieTitle;
 
