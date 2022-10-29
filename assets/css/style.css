@@ -1,9 +1,7 @@
 :root{
   --filmPrimaryColor: #7ed957;
+  --filmPrimaryDarken: #539d33;
 }
-
-@import url("https://fonts.googleapis.com/css?family=Inconsolata:700");
-
 * {
   margin: 0;
   padding: 0;
@@ -14,7 +12,8 @@ html,
 body {
   width: 100%;
   height: 100%;
-  /* color: #ccc; */
+  font-family: Inconsolata, monospace ;
+    /* color: #ccc; */
 }
 
 body {
@@ -195,4 +194,14 @@ div {
 
 .btn-fav {
   background-color: var(--filmPrimaryColor);
+}
+.btn-fav:hover, .btn-fav:active {
+  background-color: var(--filmPrimaryDarken);
+}
+#favorites-container {
+  outline: solid var(--filmPrimaryColor) 1px;
+}
+.card-title {
+  font-family: 'Bebas Neue', 'Inconsolata', monospace !important;
+  font-size: 3rem;
 }

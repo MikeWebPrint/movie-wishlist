@@ -7,6 +7,7 @@ var results = document.getElementById('results');
 var mListContainer = document.querySelector('.last-viewed');
 var movieTitle;
 
+
 searchForm.addEventListener('submit', function fetchMovieInfo
   (e, movieTitle) {
   e.preventDefault();
@@ -18,7 +19,6 @@ searchForm.addEventListener('submit', function fetchMovieInfo
   results.innerHTML = ''
   fetch(omdbsample)
     .then(function (response) {
-
       return response.json();
     })
     .then(function (data) {
@@ -117,7 +117,8 @@ console.log(dummyData);
 var currentMovieBody = document.getElementById('currentMovieBody')
 var favBtn = document.getElementById('user-favorites');
 var favoritesEl = document.getElementById('favorites-container')
-favBtn.addEventListener('click', function () {
+favBtn.addEventListener('click', function (e) {
+  e.preventDefault();
   hideSearch();
   viewFavorites();
 })
@@ -125,14 +126,31 @@ favBtn.addEventListener('click', function () {
 function hideSearch() {
   searchForm.setAttribute('class', 'd-none')
 }
+
 function viewFavorites() {
+  hideResults();
   favoritesEl.setAttribute('class', 'd-block')
+  var favList = JSON.parse(localStorage.getItem('favMovies'))
+  console.log(favList)
+  favBtn.textContent = 'Go Back';
+  favBtn.addEventListener('click', reload)
+  favoritesEl.textContent = favList
+  for (let i=0; i < favList.length; i++){
+    movieTitle = favList[i];
+    var omdbsample = 'https://www.omdbapi.com/?apikey=' + omdbAPIkey + '&t=' + movieTitle;
+    fetch(omdbsample)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log('Stored movie: ' + favList[i])
+    })
+  }
 }
 function reload() {
   window.location.reload();
 }
-// hideSearch();
-// viewFavorites()
+
 
 
 function saveFavMovies(movieTitle) {
@@ -152,10 +170,11 @@ function saveFavMovies(movieTitle) {
 function getFavMovies() {
   var favMovies = JSON.parse(localStorage.getItem('favMovies'))
   if (favMovies) {
-    createButtons(favMovies)
+    viewFavorites(favMovies)
   }
   return favMovies
 }
-function createButtons(){
-  
+
+function hideResults() {
+  results.setAttribute('class', 'd-none')
 }
