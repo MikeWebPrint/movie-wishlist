@@ -147,10 +147,6 @@ body {
   font-weight: bolder;
 }
 
-html {
-
-}
-
 header {
   text-align: center;
   /* outline: 1px solid red; */
@@ -180,7 +176,10 @@ header {
 }
 
 #results img {
-  max-width: 300px;
+  max-width: 200px;
+}
+#results p {
+  margin: 0;
 }
 .hidden{
   display:none;

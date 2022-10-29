@@ -3,27 +3,32 @@ var omdbAPIkey = 'a6d7ec72'
 var searchForm = document.getElementById('searchForm')
 var movieSearch = document.getElementById('movie-search-box')
 var results = document.getElementById('results');
-var movieStorage = JSON.parse(localStorage.getItem('movie')) || [];
+// var movieStorage = JSON.parse(localStorage.getItem('movie')) || [];
 var mListContainer = document.querySelector('.last-viewed');
+var movieTitle;
 
 searchForm.addEventListener('submit', function fetchMovieInfo
   (e, movieTitle) {
   e.preventDefault();
 
-  var movieTitle = movieSearch.value;
+  movieTitle = movieSearch.value;
   var omdbsample = 'https://www.omdbapi.com/?apikey=' + omdbAPIkey + '&t=' + movieTitle;
   movieSearch.value = '';
   movieSearch.blur();
   results.innerHTML = ''
   fetch(omdbsample)
     .then(function (response) {
+
       return response.json();
     })
     .then(function (data) {
-      console.log(data)
-      movieStorage.push(data.Title);
-      localStorage.setItem("movie", JSON.stringify(movieStorage))
+      if (data.Response ==='False'){
+        console.log('Sorry, no movie by that name')
+        results.innerHTML = '<h3>Sorry, no movie by that name.  Search again.</h3>'
+      } else {
 
+      console.log(data)
+      // saveFavMovies(movieTitle)
       // printLastViewed(movieStorage);
 
       var currentMovie = document.createElement('div');
@@ -56,11 +61,9 @@ searchForm.addEventListener('submit', function fetchMovieInfo
       var favoriteButton = document.createElement('button');
       favoriteButton.textContent= "Add to Favorites"
       favoriteButton.setAttribute('class', 'btn btn-fav')
-     
-      
-      
-
-
+      favoriteButton.addEventListener('click', function(){
+        saveFavMovies(movieTitle)
+      })
       currentMovieBody.append(movieActor, movieDirector,movieRated, movieYear, movieRating, movieGenre, favoriteButton);
       currentMovie.append(movieTitleDisplay, poster, currentMovieBody);
       results.append(currentMovie);
@@ -88,7 +91,8 @@ searchForm.addEventListener('submit', function fetchMovieInfo
       console.log(YTvideolink)
       console.log(results)
 
-    })
+    } //this bracket closes else statement in fetch
+  })
 })
 // when switching back from dummyData, uncomment the following brackets
 // })
@@ -128,4 +132,30 @@ function reload() {
   window.location.reload();
 }
 // hideSearch();
-viewFavorites()
+// viewFavorites()
+
+
+function saveFavMovies(movieTitle) {
+  getFavMovies();
+  if (getFavMovies() === null) {
+    var favMovies = [];
+  } else {
+    var favMovies = JSON.parse(localStorage.getItem('favMovies'))
+  }
+  if (favMovies.indexOf(movieTitle) < 0) {
+    favMovies.push(movieTitle)
+  }
+  localStorage.setItem('favMovies', JSON.stringify(favMovies))
+  // createButtons(favMovies)
+  // console.log(favMovies)
+}
+function getFavMovies() {
+  var favMovies = JSON.parse(localStorage.getItem('favMovies'))
+  if (favMovies) {
+    createButtons(favMovies)
+  }
+  return favMovies
+}
+function createButtons(){
+  
+}
