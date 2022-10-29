@@ -204,4 +204,20 @@ div {
 .card-title {
   font-family: 'Bebas Neue', 'Inconsolata', monospace !important;
   font-size: 3rem;
+}#new-movie-form {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+.error {
+  border-color:#ebccd1;
+  color:#a94442;
+  background-color:#f2dede;
+}
+
+.checked {
+  color: gray;
 }
