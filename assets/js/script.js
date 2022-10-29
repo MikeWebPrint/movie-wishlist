@@ -3,14 +3,16 @@ var omdbAPIkey = 'a6d7ec72'
 var searchForm = document.getElementById('searchForm')
 var movieSearch = document.getElementById('movie-search-box')
 var results = document.getElementById('results');
-var movieStorage = JSON.parse(localStorage.getItem('movie')) || [];
+// var movieStorage = JSON.parse(localStorage.getItem('movie')) || [];
 var mListContainer = document.querySelector('.last-viewed');
+var movieTitle;
+
 
 searchForm.addEventListener('submit', function fetchMovieInfo
   (e, movieTitle) {
   e.preventDefault();
 
-  var movieTitle = movieSearch.value;
+  movieTitle = movieSearch.value;
   var omdbsample = 'https://www.omdbapi.com/?apikey=' + omdbAPIkey + '&t=' + movieTitle;
   movieSearch.value = '';
   movieSearch.blur();
@@ -20,26 +22,29 @@ searchForm.addEventListener('submit', function fetchMovieInfo
       return response.json();
     })
     .then(function (data) {
-      console.log(data)
-      movieStorage.push(data.Title);
-      localStorage.setItem("movie", JSON.stringify(movieStorage))
+      if (data.Response ==='False'){
+        console.log('Sorry, no movie by that name')
+        results.innerHTML = '<h3>Sorry, no movie by that name.  Search again.</h3>'
+      } else {
 
+      console.log(data)
+      // saveFavMovies(movieTitle)
       // printLastViewed(movieStorage);
 
       var currentMovie = document.createElement('div');
-      currentMovie.setAttribute('class', 'row card');
+      currentMovie.setAttribute('class', 'card p-3');
       var currentMovieBody = document.createElement('div');
       currentMovieBody.setAttribute('class', 'card-body');
       currentMovieBody.setAttribute('id', 'currentMovieBody')
       var movieTitleDisplay = document.createElement('h3');
-      movieTitleDisplay.textContent = "Title: " + data.Title;
+      movieTitleDisplay.innerHTML = '<h3 class="card-title">'+ data.Title +'</h3>';
       console.log(movieTitle)
       var moviePoster = data.Poster;
       if (moviePoster !== "N/A") {
         var poster = document.createElement('img')
         poster.setAttribute('id', 'poster')
         poster.setAttribute('src', moviePoster)
-        results.appendChild(poster)
+        poster.setAttribute('class', 'card-img-top')
       }
       var movieActor = document.createElement('p');
       movieActor.textContent = "Actors: " + data.Actors;
@@ -54,14 +59,13 @@ searchForm.addEventListener('submit', function fetchMovieInfo
       var movieGenre = document.createElement('p');
       movieGenre.textContent = "Genre: " + data.Genre;
       var favoriteButton = document.createElement('button');
-      
-     
-      
-      
-
-
-      currentMovieBody.append(movieTitle, movieActor, movieDirector,movieRated, movieYear, movieRating, movieGenre, favoriteButton);
-      currentMovie.append(currentMovieBody);
+      favoriteButton.textContent= "Add to Favorites"
+      favoriteButton.setAttribute('class', 'btn btn-fav')
+      favoriteButton.addEventListener('click', function(){
+        saveFavMovies(movieTitle)
+      })
+      currentMovieBody.append(movieActor, movieDirector,movieRated, movieYear, movieRating, movieGenre, favoriteButton);
+      currentMovie.append(movieTitleDisplay, poster, currentMovieBody);
       results.append(currentMovie);
       var imdbId = data.imdbID;
       var YTAPIkey = 'AIzaSyDrzmBZCuAd6fYctQJe9WsiA7sfQjFDFJA'
@@ -76,18 +80,19 @@ searchForm.addEventListener('submit', function fetchMovieInfo
       //   console.log(data)
       var data = dummyData;
       var YTvideolink = data.items[0].id.videoId
-      var previewButton = document.createElement('a');
-      previewButton.innerHTML = '<h4>Watch Trailer</h4>';
-      previewButton.setAttribute('href', ('https://www.youtube.com/watch?v=' + YTvideolink));
-      results.appendChild(previewButton)
+      // var previewButton = document.createElement('a');
+      // previewButton.innerHTML = '<h4>Watch Trailer</h4>';
+      // previewButton.setAttribute('href', ('https://www.youtube.com/watch?v=' + YTvideolink));
+      // results.appendChild(previewButton)
       var YTiframe = document.createElement('div');
       YTiframe.setAttribute('class', 'ratio ratio-16x9')
       YTiframe.innerHTML = '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + YTvideolink + '" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
       results.appendChild(YTiframe)
       console.log(YTvideolink)
+      console.log(results)
 
-
-    })
+    } //this bracket closes else statement in fetch
+  })
 })
 // when switching back from dummyData, uncomment the following brackets
 // })
@@ -112,7 +117,8 @@ console.log(dummyData);
 var currentMovieBody = document.getElementById('currentMovieBody')
 var favBtn = document.getElementById('user-favorites');
 var favoritesEl = document.getElementById('favorites-container')
-favBtn.addEventListener('click', function () {
+favBtn.addEventListener('click', function (e) {
+  e.preventDefault();
   hideSearch();
   viewFavorites();
 })
@@ -120,12 +126,31 @@ favBtn.addEventListener('click', function () {
 function hideSearch() {
   searchForm.setAttribute('class', 'd-none')
 }
+
 function viewFavorites() {
+  hideResults();
   favoritesEl.setAttribute('class', 'd-block')
+  var favList = JSON.parse(localStorage.getItem('favMovies'))
+  console.log(favList)
+  favBtn.textContent = 'Go Back';
+  favBtn.addEventListener('click', reload)
+  favoritesEl.textContent = favList
+  for (let i=0; i < favList.length; i++){
+    movieTitle = favList[i];
+    var omdbsample = 'https://www.omdbapi.com/?apikey=' + omdbAPIkey + '&t=' + movieTitle;
+    fetch(omdbsample)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log('Stored movie: ' + favList[i])
+    })
+  }
 }
 function reload() {
   window.location.reload();
 }
+<<<<<<< HEAD
 // hideSearch();
 viewFavorites()
 //Let's define our favorite movies
@@ -424,3 +449,33 @@ let movies = [
   table.childNodes.forEach(function(node){
     console.log(node)
   })
+=======
+
+
+
+function saveFavMovies(movieTitle) {
+  getFavMovies();
+  if (getFavMovies() === null) {
+    var favMovies = [];
+  } else {
+    var favMovies = JSON.parse(localStorage.getItem('favMovies'))
+  }
+  if (favMovies.indexOf(movieTitle) < 0) {
+    favMovies.push(movieTitle)
+  }
+  localStorage.setItem('favMovies', JSON.stringify(favMovies))
+  // createButtons(favMovies)
+  // console.log(favMovies)
+}
+function getFavMovies() {
+  var favMovies = JSON.parse(localStorage.getItem('favMovies'))
+  if (favMovies) {
+    viewFavorites(favMovies)
+  }
+  return favMovies
+}
+
+function hideResults() {
+  results.setAttribute('class', 'd-none')
+}
+>>>>>>> 25e87d8fa473549d0a3f70eded04ec5880fcbe3e
