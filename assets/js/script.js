@@ -6,11 +6,11 @@ var results = document.getElementById('results');
 var mListContainer = document.querySelector('.last-viewed');
 var movieTitle;
 
-
+// search for a movie by title, 
 searchForm.addEventListener('submit', function fetchMovieInfo
   (e, movieTitle) {
   e.preventDefault();
-
+// get data from omdb
   movieTitle = movieSearch.value;
   var omdbsample = 'https://www.omdbapi.com/?apikey=' + omdbAPIkey + '&t=' + movieTitle;
   movieSearch.value = '';
@@ -27,9 +27,8 @@ searchForm.addEventListener('submit', function fetchMovieInfo
       } else {
 
         console.log(data)
-        // saveFavMovies(movieTitle)
-        // printLastViewed(movieStorage);
 
+// insert movie data to a card on the results part of the page
         var currentMovie = document.createElement('div');
         currentMovie.setAttribute('class', 'card p-3');
         var currentMovieBody = document.createElement('div');
@@ -66,6 +65,7 @@ searchForm.addEventListener('submit', function fetchMovieInfo
         currentMovieBody.append(movieActor, movieDirector, movieRated, movieYear, movieRating, movieGenre, favoriteButton);
         currentMovie.append(movieTitleDisplay, poster, currentMovieBody);
         results.append(currentMovie);
+        // pass id data from omdb to the Google api to retrieve the trailer from YouTube and add it to the page
         var imdbId = data.imdbID;
         var YTAPIkey = 'AIzaSyDrzmBZCuAd6fYctQJe9WsiA7sfQjFDFJA'
         var YTsample = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&type=video&q=' + imdbId + '+' + movieTitle + '+movie+official+trailer&key=' + YTAPIkey + '&max-results=5';
@@ -95,7 +95,7 @@ searchForm.addEventListener('submit', function fetchMovieInfo
 })
 // when switching back from dummyData, uncomment the following brackets
 // })
-
+// get dummyData to pull a YouTube video during development
 import { dummyData } from './modules/ytDummyData.js';
 console.log(dummyData);
 
@@ -113,6 +113,7 @@ console.log(dummyData);
 //   console.log(movieList);
 // }
 
+// event listener on the View Favorites button
 var currentMovieBody = document.getElementById('currentMovieBody')
 var favBtn = document.getElementById('user-favorites');
 var favoritesEl = document.getElementById('favorites-container')
@@ -121,37 +122,31 @@ favBtn.addEventListener('click', function (e) {
   hideSearch();
   viewFavorites();
 })
-
+// utility class to hide the search form when looking at favorites
 function hideSearch() {
   searchForm.setAttribute('class', 'd-none')
 }
-
+// view the list of favorite items
 function viewFavorites() {
   hideResults();
   var favList = JSON.parse(localStorage.getItem('favMovies'))
   favoritesEl.setAttribute('class', 'd-block')
   favoritesEl.textContent = '';
   console.log(favList)
-  favBtn.textContent = 'Go Back';
+  favBtn.textContent = 'Go Back'; //go back to the main page
   favBtn.addEventListener('click', reload)
-
-
   /* Let's create variables to hold elements that will be used to create our table header*/
   let movieTable = document.createElement("table")
-
   /* Add bootstrap styling to table */
   movieTable.setAttribute("class", "table text-light table-striped");
+  favoritesEl.appendChild(movieTable);
 
-
-  document.getElementById("favorites-container").appendChild(movieTable);
-
-
-
-  // favoritesEl.textContent = favList
+// if no favorite items, hide the favorite panel and reload the page
   if (favList.length < 1){
     favoritesEl.setAttribute('class','d-none');
     reload()
   } else {
+    // iterate the list in localStorage and pull its info from omdb
     for (let i = 0; i < favList.length; i++) {
       movieTitle = favList[i];
       var omdbsample = 'https://www.omdbapi.com/?apikey=' + omdbAPIkey + '&t=' + movieTitle;
@@ -161,6 +156,7 @@ function viewFavorites() {
           return response.json();
         })
         .then(function (data) {
+          // create the table and the content of each row by each movie
           console.log('Stored movie: ' + favList[i])
           var moviePoster = data.Poster
           var poster = document.createElement('img')
@@ -169,9 +165,9 @@ function viewFavorites() {
           let imgCell = document.createElement('td');
           imgCell.appendChild(poster)
           let favTitle = document.createElement('td');
-          // favTitle.setAttribute('class', 'text-light')
           favTitle.textContent = favList[i];
           let remBtn = document.createElement('td');
+          // set the functionality of the remove buttons
           remBtn.innerHTML = '<span class="btn btn-danger">Remove</span>';
           remBtn.addEventListener('click', function(){
             let itemToRemove = favList[i]
