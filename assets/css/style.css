@@ -13,7 +13,7 @@ body {
   width: 100%;
   height: 100%;
   font-family: Inconsolata, monospace ;
-    /* color: #ccc; */
+  /* color: #ccc; */
 }
 
 body {
@@ -177,6 +177,9 @@ header {
 #results img {
   max-width: 200px;
 }
+.favImg {
+  max-width: 150px;
+}
 #results p {
   margin: 0;
 }
@@ -204,4 +207,7 @@ div {
 .card-title {
   font-family: 'Bebas Neue', 'Inconsolata', monospace !important;
   font-size: 3rem;
+}
+.table>:not(:last-child)>:last-child>* {
+  border-bottom-color: red !important;
 }
