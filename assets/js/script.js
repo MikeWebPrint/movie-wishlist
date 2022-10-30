@@ -244,11 +244,13 @@ function getFavMovies() {
 function checkFavMovies(movieTitle) {
   var isSaved = false;
   var favMovies = JSON.parse(localStorage.getItem('favMovies'))
-  const index = favMovies.indexOf(movieTitle)
-  console.log('this movie is: ' + movieTitle)
-  if (index >= 0) {
-    isSaved = true;
+  if (favMovies){
+    const index = favMovies.indexOf(movieTitle)
+    if (index >= 0) {
+      isSaved = true;
+    }
   }
+  console.log('this movie is: ' + movieTitle)
   return isSaved
 }
 
