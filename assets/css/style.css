@@ -207,7 +207,6 @@ div {
 .card-title {
   font-family: 'Bebas Neue', 'Inconsolata', monospace !important;
   font-size: 3rem;
-<<<<<<< HEAD
 }#new-movie-form {
   display: none;
 }
@@ -225,9 +224,6 @@ div {
 .checked {
   color: gray;
 }
-=======
-}
 .table>:not(:last-child)>:last-child>* {
   border-bottom-color: red !important;
 }
->>>>>>> f059953fc524dc12911a7b331b3def62203555a6
