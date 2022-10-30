@@ -128,8 +128,9 @@ function hideSearch() {
 
 function viewFavorites() {
   hideResults();
-  favoritesEl.setAttribute('class', 'd-block')
   var favList = JSON.parse(localStorage.getItem('favMovies'))
+  favoritesEl.setAttribute('class', 'd-block')
+  favoritesEl.textContent = '';
   console.log(favList)
   favBtn.textContent = 'Go Back';
   favBtn.addEventListener('click', reload)
@@ -138,18 +139,19 @@ function viewFavorites() {
   /* Let's create variables to hold elements that will be used to create our table header*/
   let movieTable = document.createElement("table")
 
-
   /* Add bootstrap styling to table */
   movieTable.setAttribute("class", "table text-light table-striped");
 
-  /*add movie table to div with id "table"*/
-  // document.getElementById("table").textContent = '';
-  document.getElementById("table").appendChild(movieTable);
+
+  document.getElementById("favorites-container").appendChild(movieTable);
 
 
 
   // favoritesEl.textContent = favList
-  if (favList){
+  if (favList.length < 1){
+    favoritesEl.setAttribute('class','d-none');
+    reload()
+  } else {
     for (let i = 0; i < favList.length; i++) {
       movieTitle = favList[i];
       var omdbsample = 'https://www.omdbapi.com/?apikey=' + omdbAPIkey + '&t=' + movieTitle;
@@ -171,14 +173,23 @@ function viewFavorites() {
           favTitle.textContent = favList[i];
           let remBtn = document.createElement('td');
           remBtn.innerHTML = '<span class="btn btn-danger">Remove</span>';
+          remBtn.addEventListener('click', function(){
+            let itemToRemove = favList[i]
+            let favMovies = JSON.parse(localStorage.getItem('favMovies'))
+          console.log(favMovies[i])
+          const index = favMovies.indexOf(itemToRemove)
+          favMovies.splice(index,1)
+          console.log(favMovies)
+          localStorage.setItem('favMovies', JSON.stringify(favMovies))
+          viewFavorites()
+          })
           let favRow = document.createElement('tr');
           favRow.append(imgCell, favTitle, remBtn);
           movieTable.appendChild(favRow);
         })
-  // add more instructions for each movie in the list here
     }
 
-  }
+  } 
 }
 function reload() {
   window.location.reload();
