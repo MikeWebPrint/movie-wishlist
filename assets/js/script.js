@@ -1,3 +1,8 @@
+// bootstrap modal
+var myModal = new bootstrap.Modal(document.getElementById('myModal'), {
+  keyboard: true,
+  focus: true
+})
 // OMDB 
 var omdbAPIkey = 'a6d7ec72'
 var searchForm = document.getElementById('searchForm')
@@ -7,11 +12,15 @@ var mListContainer = document.querySelector('.last-viewed');
 var movieTitle;
 
 // search for a movie by title, 
-searchForm.addEventListener('submit', function fetchMovieInfo
-  (e, movieTitle) {
+searchForm.addEventListener('submit', function (e, movieTitle) {
   e.preventDefault();
-// get data from omdb
-  movieTitle = movieSearch.value;
+  var movieTitle = movieSearch.value;
+  fetchMovieInfo(movieTitle)
+})
+// get dummyData to pull a YouTube video during development
+import { dummyData } from './modules/ytDummyData.js'; // don't need to turn this line off
+function fetchMovieInfo(movieTitle) {
+  // get data from omdb
   var omdbsample = 'https://www.omdbapi.com/?apikey=' + omdbAPIkey + '&t=' + movieTitle;
   movieSearch.value = '';
   movieSearch.blur();
@@ -23,12 +32,12 @@ searchForm.addEventListener('submit', function fetchMovieInfo
     .then(function (data) {
       if (data.Response === 'False') {
         console.log('Sorry, no movie by that name')
-        results.innerHTML = '<h3>Sorry, no movie by that name.  Search again.</h3>'
+        myModal.show()
       } else {
 
         console.log(data)
 
-// insert movie data to a card on the results part of the page
+        // insert movie data to a card on the results part of the page
         var currentMovie = document.createElement('div');
         currentMovie.setAttribute('class', 'card p-3');
         var currentMovieBody = document.createElement('div');
@@ -57,10 +66,15 @@ searchForm.addEventListener('submit', function fetchMovieInfo
         var movieGenre = document.createElement('p');
         movieGenre.textContent = "Genre: " + data.Genre;
         var favoriteButton = document.createElement('button');
-        favoriteButton.textContent = "Add to Favorites"
+        if (checkFavMovies(movieTitle) === true) {
+          favoriteButton.textContent = "Saved"
+        } else {
+          favoriteButton.textContent = "Add to Favorites"
+        }
         favoriteButton.setAttribute('class', 'btn btn-fav')
         favoriteButton.addEventListener('click', function () {
           saveFavMovies(movieTitle)
+          favoriteButton.textContent = "Saved"
         })
         currentMovieBody.append(movieActor, movieDirector, movieRated, movieYear, movieRating, movieGenre, favoriteButton);
         currentMovie.append(movieTitleDisplay, poster, currentMovieBody);
@@ -69,35 +83,29 @@ searchForm.addEventListener('submit', function fetchMovieInfo
         var imdbId = data.imdbID;
         var YTAPIkey = 'AIzaSyDrzmBZCuAd6fYctQJe9WsiA7sfQjFDFJA'
         var YTsample = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&type=video&q=' + imdbId + '+' + movieTitle + '+movie+official+trailer&key=' + YTAPIkey + '&max-results=5';
-        // following code commented out to point to dummyData instead
-        // fetch(YTsample)
-        // .then(function(response){
-        //   console.log(response)
-        //   return response.json();
-        // })
-        // .then(function(data) {
-        //   console.log(data)
-        var data = dummyData;
-        var YTvideolink = data.items[0].id.videoId
-        // var previewButton = document.createElement('a');
-        // previewButton.innerHTML = '<h4>Watch Trailer</h4>';
-        // previewButton.setAttribute('href', ('https://www.youtube.com/watch?v=' + YTvideolink));
-        // results.appendChild(previewButton)
-        var YTiframe = document.createElement('div');
-        YTiframe.setAttribute('class', 'ratio ratio-16x9')
-        YTiframe.innerHTML = '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + YTvideolink + '" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-        results.appendChild(YTiframe)
-        console.log(YTvideolink)
-        console.log(results)
-
-      } //this bracket closes else statement in fetch
+        // following 7 lines of code comment out to point to dummyData instead
+        fetch(YTsample)
+          .then(function (response) {
+            console.log(response)
+            return response.json();
+          })
+          .then(function (data) {
+            console.log(data)
+            // var data = dummyData; //toggle on for dummyData
+            var YTvideolink = data.items[0].id.videoId
+            var YTiframe = document.createElement('div');
+            YTiframe.setAttribute('class', 'ratio ratio-16x9')
+            YTiframe.innerHTML = '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + YTvideolink + '" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+            results.appendChild(YTiframe)
+            console.log(YTvideolink)
+            console.log(results)
+// the following 1 line of closing brackets for live YT use.  Comment out for dummy data
+          } )
+          // the following 3 lines of brackets remain in place
+          }
     })
-})
-// when switching back from dummyData, uncomment the following brackets
-// })
-// get dummyData to pull a YouTube video during development
-import { dummyData } from './modules/ytDummyData.js';
-console.log(dummyData);
+  }
+
 
 // function printLastViewed(){
 //   mListContainer.innerHTML='';
@@ -126,6 +134,9 @@ favBtn.addEventListener('click', function (e) {
 function hideSearch() {
   searchForm.setAttribute('class', 'd-none')
 }
+function hideFavorites() {
+  favoritesEl.setAttribute('class', 'd-none')
+}
 // view the list of favorite items
 function viewFavorites() {
   hideResults();
@@ -141,9 +152,9 @@ function viewFavorites() {
   movieTable.setAttribute("class", "table text-light table-striped");
   favoritesEl.appendChild(movieTable);
 
-// if no favorite items, hide the favorite panel and reload the page
-  if (favList.length < 1){
-    favoritesEl.setAttribute('class','d-none');
+  // if no favorite items, hide the favorite panel and reload the page
+  if (favList.length < 1) {
+    favoritesEl.setAttribute('class', 'd-none');
     reload()
   } else {
     // iterate the list in localStorage and pull its info from omdb
@@ -162,6 +173,13 @@ function viewFavorites() {
           var poster = document.createElement('img')
           poster.setAttribute('src', moviePoster)
           poster.setAttribute('class', 'favImg')
+          poster.addEventListener('click', function () {
+            console.log(favList[i])
+            movieTitle = favList[i]
+            fetchMovieInfo(movieTitle)
+            showResults();
+            hideFavorites();
+          })
           let imgCell = document.createElement('td');
           imgCell.appendChild(poster)
           let favTitle = document.createElement('td');
@@ -169,15 +187,15 @@ function viewFavorites() {
           let remBtn = document.createElement('td');
           // set the functionality of the remove buttons
           remBtn.innerHTML = '<span class="btn btn-danger">Remove</span>';
-          remBtn.addEventListener('click', function(){
+          remBtn.addEventListener('click', function () {
             let itemToRemove = favList[i]
             let favMovies = JSON.parse(localStorage.getItem('favMovies'))
-          console.log(favMovies[i])
-          const index = favMovies.indexOf(itemToRemove)
-          favMovies.splice(index,1)
-          console.log(favMovies)
-          localStorage.setItem('favMovies', JSON.stringify(favMovies))
-          viewFavorites()
+            console.log(favMovies[i])
+            const index = favMovies.indexOf(itemToRemove)
+            favMovies.splice(index, 1)
+            console.log(favMovies)
+            localStorage.setItem('favMovies', JSON.stringify(favMovies))
+            viewFavorites()
           })
           let favRow = document.createElement('tr');
           favRow.append(imgCell, favTitle, remBtn);
@@ -185,13 +203,12 @@ function viewFavorites() {
         })
     }
 
-  } 
+  }
 }
 function reload() {
   window.location.reload();
 }
-// hideSearch();
-// viewFavorites()
+
 
 
 
@@ -224,7 +241,24 @@ function getFavMovies() {
   }
   return favMovies
 }
+function checkFavMovies(movieTitle) {
+  var isSaved = false;
+  var favMovies = JSON.parse(localStorage.getItem('favMovies'))
+  const index = favMovies.indexOf(movieTitle)
+  console.log('this movie is: ' + movieTitle)
+  if (index >= 0) {
+    isSaved = true;
+  }
+  return isSaved
+}
 
 function hideResults() {
   results.setAttribute('class', 'd-none')
 }
+function showResults() {
+  results.setAttribute('class', 'd-block')
+}
+
+
+
+
