@@ -7,11 +7,14 @@ var mListContainer = document.querySelector('.last-viewed');
 var movieTitle;
 
 // search for a movie by title, 
-searchForm.addEventListener('submit', function fetchMovieInfo
-  (e, movieTitle) {
+searchForm.addEventListener('submit', function (e, movieTitle){
   e.preventDefault();
+  var movieTitle = movieSearch.value;
+  fetchMovieInfo(movieTitle)
+})
+
+function fetchMovieInfo(movieTitle) {
 // get data from omdb
-  movieTitle = movieSearch.value;
   var omdbsample = 'https://www.omdbapi.com/?apikey=' + omdbAPIkey + '&t=' + movieTitle;
   movieSearch.value = '';
   movieSearch.blur();
@@ -57,10 +60,15 @@ searchForm.addEventListener('submit', function fetchMovieInfo
         var movieGenre = document.createElement('p');
         movieGenre.textContent = "Genre: " + data.Genre;
         var favoriteButton = document.createElement('button');
-        favoriteButton.textContent = "Add to Favorites"
+        if (checkFavMovies(movieTitle) === true){
+          favoriteButton.textContent = "Saved"
+        } else {
+          favoriteButton.textContent = "Add to Favorites"
+        }
         favoriteButton.setAttribute('class', 'btn btn-fav')
         favoriteButton.addEventListener('click', function () {
           saveFavMovies(movieTitle)
+          favoriteButton.textContent = "Saved"
         })
         currentMovieBody.append(movieActor, movieDirector, movieRated, movieYear, movieRating, movieGenre, favoriteButton);
         currentMovie.append(movieTitleDisplay, poster, currentMovieBody);
@@ -92,7 +100,7 @@ searchForm.addEventListener('submit', function fetchMovieInfo
 
       } //this bracket closes else statement in fetch
     })
-})
+}
 // when switching back from dummyData, uncomment the following brackets
 // })
 // get dummyData to pull a YouTube video during development
@@ -125,6 +133,9 @@ favBtn.addEventListener('click', function (e) {
 // utility class to hide the search form when looking at favorites
 function hideSearch() {
   searchForm.setAttribute('class', 'd-none')
+}
+function hideFavorites() {
+  favoritesEl.setAttribute('class', 'd-none')
 }
 // view the list of favorite items
 function viewFavorites() {
@@ -162,6 +173,13 @@ function viewFavorites() {
           var poster = document.createElement('img')
           poster.setAttribute('src', moviePoster)
           poster.setAttribute('class', 'favImg')
+          poster.addEventListener('click', function(){
+            console.log(favList[i])
+            movieTitle = favList[i]
+            fetchMovieInfo(movieTitle)
+            showResults();
+            hideFavorites();
+          })
           let imgCell = document.createElement('td');
           imgCell.appendChild(poster)
           let favTitle = document.createElement('td');
@@ -224,7 +242,20 @@ function getFavMovies() {
   }
   return favMovies
 }
+function checkFavMovies(movieTitle){
+  var isSaved = false;
+  var favMovies = JSON.parse(localStorage.getItem('favMovies'))
+  const index = favMovies.indexOf(movieTitle)
+  console.log('this movie is: '+ movieTitle)
+  if (index >= 0){
+  isSaved = true;
+  }
+  return isSaved
+}
 
 function hideResults() {
   results.setAttribute('class', 'd-none')
+}
+function showResults() {
+  results.setAttribute('class', 'd-block')
 }
