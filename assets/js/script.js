@@ -5,7 +5,7 @@ var movieSearch = document.getElementById('movie-search-box')
 var results = document.getElementById('results');
 var movieStorage = JSON.parse(localStorage.getItem('movie')) || [];
 var mListContainer = document.querySelector('.last-viewed');
-
+var favoriteButton;
 searchForm.addEventListener('submit', function fetchMovieInfo
   (e, movieTitle) {
   e.preventDefault();
@@ -21,8 +21,7 @@ searchForm.addEventListener('submit', function fetchMovieInfo
     })
     .then(function (data) {
       console.log(data)
-      movieStorage.push(data.Title);
-      localStorage.setItem("movie", JSON.stringify(movieStorage))
+     
 
       // printLastViewed(movieStorage);
 
@@ -54,8 +53,9 @@ searchForm.addEventListener('submit', function fetchMovieInfo
       var movieGenre = document.createElement('p');
       movieGenre.textContent = "Genre: " + data.Genre;
       var favoriteButton = document.createElement('button');
+      favoriteButton.setAttribute('id', 'red')
       
-     
+     favoriteButton.onclick= saveFavorite(data);
       
       
 
@@ -108,6 +108,18 @@ console.log(dummyData);
 //   }
 //   console.log(movieList);
 // }
+function saveFavorite(){
+  if(favoriteButton === "red"){
+    movieStorage.push(data.Title);
+    localStorage.setItem("movie", JSON.stringify(movieStorage))
+    favoriteButton.setAttribute('id', 'yellow')
+  }else if(favoriteButton === "yellow"){
+
+    localStorage.removeItem('movie')
+    favoriteButton.setAttribute('id', 'red')
+
+  }
+}
 
 var currentMovieBody = document.getElementById('currentMovieBody')
 var favBtn = document.getElementById('user-favorites');
