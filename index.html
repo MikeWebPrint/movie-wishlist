@@ -1,96 +1,127 @@
 <!DOCTYPE html>
 
 <html lang="en-us">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<head>
+<title>Film Findr</title>
+<meta charset="UTF-8">
 
-  <title>Movie Wishlist</title>
-  <meta charset="UTF-8">
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-  <!-- CSS -->
-  <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
-  <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
-
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+<link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico">
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inconsolata:wght@400;700&display=swap"
+  rel="stylesheet">
 </head>
 
 <body>
-
-
-  <!-- Header -->
-  <div class="header">
-        <h1>Movie Wishlist</h1>
-  </div>
-  <br>
-  <nav class="navbar navbar-light bg-light">
-  <button id="user-favorites" class="btn btn-outline-success" type="button">Favorites list</button>
-</nav>
-  <header id="site-header" class="header-footer-group" role="banner">
-    <div class="header-inner section-inner">
-      <img src="/assets/images/film findr!-2.png"
-      <div class="header-titles-wrapper"></div>
-    </div>
-
-  </header>
-
-
-    <div class="container search-container">
-      <form action="" id="searchForm">
-        <input type="text" placeholder="Search Movie title" id="movie-search-box">
-
-        <div class="search"></div>
-
-      </form>
-      
+  <div id='myModal' class="modal" data-bs-keyboard='true' data-bs-focus='true' tabindex="-1" aria-labelledby="No Movie Found">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">No Movie Found</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Sorry, we couldn't find that movie.  Please check your title spelling and try again.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
       </div>
-      <div class="search-list" id="search-list"></div>
-
-      <!-- <button id="New-movies" class="btn btn-outline-success" type="button">What's New</button>
-      <button id="Trending-movies" class="btn btn-outline-success" type="button">What's Trending</button>
-      <button id="user-favorites" class="btn btn-outline-success" type="button">Favorites</button> -->
-
     </div>
-      <div id="main-container">
+  </div>
+  <div class="container">
+    <nav class="navbar navbar-light ">
+      <button id="user-favorites" class="btn btn-fav" type="button">View Favorites</button>
+    </nav>
+    <!-- Header -->
+    <header id="site-header" class="header-footer-group my-3 py-5" role="banner">
+      <h1>
+        <img src="./assets/images/filmfindr!-2.png" alt="Film Findr" class="img-fluid">
+      </h1>
 
-        <div id="search-container">
+    </header>
+
+    <div class="row">
+      <div class="col col-9 col-md-4 mx-auto">
+        <div class="search-container">
+          <form action="" id="searchForm" class="d-flex justify-content-center ">
+            <!-- search input field -->
+            <input type="text" placeholder="Search Movie title" id="movie-search-box">
+            <div class="search"></div>
+            <!-- search button -->
+            <div id="search-container" class="">
+            </div>
+          </form>
         </div>
-
-          <!-- Results -->
-          <div id="results">
-            <img class= "poster" src=""/>
-          </div>
-
-        <!--Last viewed movies-->
-        <div id="last-viewed-container">
-            <ol class="last-viewed">
-                
-            </ol>
-
-        <div id="results" class="container">
-          <img id="poster" src="" class="d-none"/>
-        </div>
+      </div>
+    </div>
 
         <!-- Favorites Container-->
         <div id="favorites-container" class="d-none">
-          Favorites go in this div.
-        </div>
+          <div class="container">
+            <button type="button" id="new-movie" class="btn btn-sm btn-primary">Add to favorite list</button>
+          
+            
+            <div id="new-movie-form">
+              <div id="status" class="error"></div>
+              
+              <form name="movieform" class="movie-form">
+              <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" class="form-control" id="title">
+              </div>
+              <div class="form-group">
+                <label for="img">Image:</label>
+                <input type="text" class="form-control" id="img">
+              </div>
+              
+              <div class="form-group">
+                <label for="rating">Rating:</label>
+                <input type="number" class="form-control" id="rating">
+              </div>
+              
+              <!--<button type="button" id="save-new-movie" class="btn btn-primary"  Save</button>
+          OR
+          -->
+                <input class="btn btn-sm btn-primary" type="submit" value="Save" id="save-new-movie" onClick=addMovie(movieform)>
+              </form>
+            </div>
+            <div id="table"> </div>
+          </div>
+          </div>
+    <!-- Favorites Container-->
+    <div id="favorites-container" class="d-none">
+    </div>
+    <!--Last viewed movies-->
+    <!-- <div id="last-viewed-container">
+      <ol class="last-viewed">
+      </ol>
+    </div> -->
+
+    <!-- Results -->
+    <div id="results" class="row">
+    </div>
+  </div>
 
 
-      <div id="video-player"></div>
+  <!-- jQuery -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-      <div id="video-background" class="close-trailer"></div>
+  <!-- Bootstrap -->
 
-      <!-- jQuery -->
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-      <!-- Script -->
-      <script type="module" src="./assets/js/script.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <!-- Script -->
+  <script type="module" src="./assets/js/script.js"></script>
 
 </body>
 
