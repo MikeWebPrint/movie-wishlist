@@ -9,16 +9,10 @@ var searchForm = document.getElementById('searchForm')
 var movieSearch = document.getElementById('movie-search-box')
 var results = document.getElementById('results');
 var mListContainer = document.querySelector('.last-viewed');
-<<<<<<< HEAD
-var favoriteButton;
-searchForm.addEventListener('submit', function fetchMovieInfo
-  (e, movieTitle) {
-=======
 var movieTitle;
 
 // search for a movie by title, 
 searchForm.addEventListener('submit', function (e, movieTitle) {
->>>>>>> 2212844500c57ddf10c1ada6b0258124a063ab79
   e.preventDefault();
   var movieTitle = movieSearch.value;
   fetchMovieInfo(movieTitle)
@@ -36,78 +30,10 @@ function fetchMovieInfo(movieTitle) {
       return response.json();
     })
     .then(function (data) {
-<<<<<<< HEAD
-      console.log(data)
-     
-
-      // printLastViewed(movieStorage);
-
-      var currentMovie = document.createElement('div');
-      currentMovie.setAttribute('class', 'row card');
-      var currentMovieBody = document.createElement('div');
-      currentMovieBody.setAttribute('class', 'card-body');
-      currentMovieBody.setAttribute('id', 'currentMovieBody')
-      var movieTitleDisplay = document.createElement('h3');
-      movieTitleDisplay.textContent = "Title: " + data.Title;
-      console.log(movieTitle)
-      var moviePoster = data.Poster;
-      if (moviePoster !== "N/A") {
-        var poster = document.createElement('img')
-        poster.setAttribute('id', 'poster')
-        poster.setAttribute('src', moviePoster)
-        results.appendChild(poster)
-      }
-      var movieActor = document.createElement('p');
-      movieActor.textContent = "Actors: " + data.Actors;
-      var movieDirector = document.createElement('p');
-      movieDirector.textContent = "Director: " + data.Director;
-      var movieRated = document.createElement('p');
-      movieRated.textContent = "Rated: " + data.Rated;
-      var movieYear = document.createElement('p');
-      movieYear.textContent = "Year: " + data.Year;
-      var movieRating = document.createElement('p');
-      movieRating.textContent = "Rating: " + data.imdbRating;
-      var movieGenre = document.createElement('p');
-      movieGenre.textContent = "Genre: " + data.Genre;
-      var favoriteButton = document.createElement('button');
-      favoriteButton.setAttribute('id', 'red')
-      
-     favoriteButton.onclick= saveFavorite(data);
-      
-      
-
-
-      currentMovieBody.append(movieTitle, movieActor, movieDirector,movieRated, movieYear, movieRating, movieGenre, favoriteButton);
-      currentMovie.append(currentMovieBody);
-      results.append(currentMovie);
-      var imdbId = data.imdbID;
-      var YTAPIkey = 'AIzaSyDrzmBZCuAd6fYctQJe9WsiA7sfQjFDFJA'
-      var YTsample = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&type=video&q=' + imdbId + '+' + movieTitle + '+movie+official+trailer&key=' + YTAPIkey + '&max-results=5';
-      // following code commented out to point to dummyData instead
-      // fetch(YTsample)
-      // .then(function(response){
-      //   console.log(response)
-      //   return response.json();
-      // })
-      // .then(function(data) {
-      //   console.log(data)
-      var data = dummyData;
-      var YTvideolink = data.items[0].id.videoId
-      var previewButton = document.createElement('a');
-      previewButton.innerHTML = '<h4>Watch Trailer</h4>';
-      previewButton.setAttribute('href', ('https://www.youtube.com/watch?v=' + YTvideolink));
-      results.appendChild(previewButton)
-      var YTiframe = document.createElement('div');
-      YTiframe.setAttribute('class', 'ratio ratio-16x9')
-      YTiframe.innerHTML = '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + YTvideolink + '" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-      results.appendChild(YTiframe)
-      console.log(YTvideolink)
-=======
       if (data.Response === 'False') {
         console.log('Sorry, no movie by that name')
         myModal.show()
       } else {
->>>>>>> 2212844500c57ddf10c1ada6b0258124a063ab79
 
         console.log(data)
 
@@ -194,18 +120,6 @@ function fetchMovieInfo(movieTitle) {
 //   }
 //   console.log(movieList);
 // }
-function saveFavorite(){
-  if(favoriteButton === "red"){
-    movieStorage.push(data.Title);
-    localStorage.setItem("movie", JSON.stringify(movieStorage))
-    favoriteButton.setAttribute('id', 'yellow')
-  }else if(favoriteButton === "yellow"){
-
-    localStorage.removeItem('movie')
-    favoriteButton.setAttribute('id', 'red')
-
-  }
-}
 
 // event listener on the View Favorites button
 var currentMovieBody = document.getElementById('currentMovieBody')
