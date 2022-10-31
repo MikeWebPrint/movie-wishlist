@@ -190,11 +190,6 @@ header {
 nav{
   color: black;
 }
-div {
-  /* outline: solid 1px white; */
-  /* height: 25px; */
-}
-
 .btn-fav {
   background-color: var(--filmPrimaryColor);
 }
