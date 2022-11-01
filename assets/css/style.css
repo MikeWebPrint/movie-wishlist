@@ -196,9 +196,9 @@ nav{
 .btn-fav:hover, .btn-fav:active {
   background-color: var(--filmPrimaryDarken);
 }
-#favorites-container {
+/* #favorites-container {
   outline: solid var(--filmPrimaryColor) 1px;
-}
+} */
 .card-title {
   font-family: 'Bebas Neue', 'Inconsolata', monospace !important;
   font-size: 3rem;
@@ -221,4 +221,14 @@ nav{
 }
 .table>:not(:last-child)>:last-child>* {
   border-bottom-color: red !important;
+}
+h3 {
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+}
+tr {
+  border-bottom: 1px solid white;
+font-size: 18px;
 }

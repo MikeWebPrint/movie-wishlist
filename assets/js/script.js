@@ -141,7 +141,7 @@ function hideFavorites() {
 function viewFavorites() {
   hideResults();
   var favList = JSON.parse(localStorage.getItem('favMovies'))
-  favoritesEl.setAttribute('class', 'd-block')
+  favoritesEl.setAttribute('class', 'd-block col col-12 col-md-8 mx-auto')
   favoritesEl.textContent = '';
   console.log(favList)
   favBtn.textContent = 'Go Back'; //go back to the main page
@@ -149,7 +149,10 @@ function viewFavorites() {
   /* Let's create variables to hold elements that will be used to create our table header*/
   let movieTable = document.createElement("table")
   /* Add bootstrap styling to table */
-  movieTable.setAttribute("class", "table text-light table-striped");
+  movieTable.setAttribute("class", "table text-light table-hover table-striped");
+  var favoritesHeader = document.createElement('h3');
+  favoritesHeader.textContent = 'Favorites List';
+  favoritesEl.appendChild(favoritesHeader);
   favoritesEl.appendChild(movieTable);
 
   // if no favorite items, hide the favorite panel and reload the page
