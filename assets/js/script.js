@@ -84,14 +84,14 @@ function fetchMovieInfo(movieTitle) {
         var YTAPIkey = 'AIzaSyDrzmBZCuAd6fYctQJe9WsiA7sfQjFDFJA'
         var YTsample = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&type=video&q=' + imdbId + '+' + movieTitle + '+movie+official+trailer&key=' + YTAPIkey + '&max-results=5';
         // following 7 lines of code comment out to point to dummyData instead
-        fetch(YTsample)
-          .then(function (response) {
-            console.log(response)
-            return response.json();
-          })
-          .then(function (data) {
-            console.log(data)
-            // var data = dummyData; //toggle on for dummyData
+        // fetch(YTsample)
+        //   .then(function (response) {
+        //     console.log(response)
+        //     return response.json();
+        //   })
+        //   .then(function (data) {
+        //     console.log(data)
+            var data = dummyData; //toggle on for dummyData
             var YTvideolink = data.items[0].id.videoId
             var YTiframe = document.createElement('div');
             YTiframe.setAttribute('class', 'ratio ratio-16x9')
@@ -100,7 +100,7 @@ function fetchMovieInfo(movieTitle) {
             console.log(YTvideolink)
             console.log(results)
 // the following 1 line of closing brackets for live YT use.  Comment out for dummy data
-          } )
+          // } )
           // the following 3 lines of brackets remain in place
           }
     })
