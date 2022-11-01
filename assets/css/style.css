@@ -17,8 +17,9 @@ body {
 }
 
 body {
-  background-image: linear-gradient(black, rgb(1, 1, 39));
-  background-size: cover;
+  background-image: linear-gradient(black, rgb(21, 21, 230));
+  background-attachment: fixed;
+
 }
 
 
@@ -111,12 +112,12 @@ body {
 }
 
 .search-container input:focus {
-  width: 400px;
+  width: 310px;
   opacity: 1;
   cursor: text;
 }
 .search-container input:focus ~ .search {
-  left: 400px;
+  left: 310px;
   background: black;
   z-index: 16;
 
