@@ -1,5 +1,8 @@
 :root{
   --filmPrimaryColor: #7ed957;
+  --filmPrimaryLight: #350a7f;
+  /* --filmPrimaryLight: #ffffff; */
+
   --filmPrimaryDarken: #539d33;
 }
 * {
@@ -12,7 +15,7 @@ html,
 body {
   width: 100%;
   height: 100%;
-  font-family: Inconsolata, monospace ;
+  font-family: 'Fira Sans', sans-serif ;
   /* color: #ccc; */
 }
 
@@ -222,7 +225,7 @@ nav{
 .table>:not(:last-child)>:last-child>* {
   border-bottom-color: red !important;
 }
-h3 {
+h4 {
   text-align: center;
   color: white;
   font-weight: bold;
@@ -231,4 +234,10 @@ h3 {
 tr {
   border-bottom: 1px solid white;
 font-size: 18px;
+}
+.card {
+  background-color: var(--filmPrimaryLight);
+color: white;
+font-size: 20px;
+font-family: 'Fira Sans', sans-serif;
 }

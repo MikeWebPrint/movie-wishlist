@@ -150,7 +150,7 @@ function viewFavorites() {
   let movieTable = document.createElement("table")
   /* Add bootstrap styling to table */
   movieTable.setAttribute("class", "table text-light table-hover table-striped");
-  var favoritesHeader = document.createElement('h3');
+  var favoritesHeader = document.createElement('h4');
   favoritesHeader.textContent = 'Favorites List';
   favoritesEl.appendChild(favoritesHeader);
   favoritesEl.appendChild(movieTable);
